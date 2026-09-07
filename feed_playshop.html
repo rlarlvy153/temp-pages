@@ -180,15 +180,35 @@
         white-space: nowrap;
       }
 
-      .arrow {
+      .map-links {
+        display: flex;
+        gap: 7px;
+      }
+
+      .map-link {
         display: grid;
         width: 36px;
         height: 36px;
         place-items: center;
         border-radius: 50%;
-        background: var(--ink);
+        font-size: 15px;
+        font-weight: 900;
+        text-decoration: none;
+        transition: transform 160ms ease;
+      }
+
+      .map-link:hover {
+        transform: scale(1.09);
+      }
+
+      .map-link.naver {
+        background: #03c75a;
         color: white;
-        font-size: 17px;
+      }
+
+      .map-link.kakao {
+        background: #fee500;
+        color: #191919;
       }
 
       .teams {
@@ -325,11 +345,11 @@
       <section aria-labelledby="schedule-title">
         <div class="section-heading">
           <h2 id="schedule-title">오늘의 일정</h2>
-          <p class="section-note">장소를 누르면 지도에서 확인할 수 있어요.</p>
+          <p class="section-note">N은 네이버 지도, K는 카카오맵으로 연결됩니다.</p>
         </div>
 
         <div class="schedule">
-          <a class="schedule-card" href="https://naver.me/FXwGVuvg" target="_blank" rel="noreferrer">
+          <article class="schedule-card">
             <span class="order">01</span>
             <span class="place">
               <strong>웨스틴 조선 서울 아리아</strong>
@@ -337,11 +357,14 @@
             </span>
             <span class="card-side">
               <span class="time">시간 추후 공개</span>
-              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="map-links">
+                <a class="map-link naver" href="https://naver.me/FXwGVuvg" target="_blank" rel="noreferrer" aria-label="웨스틴 조선 서울 아리아 네이버 지도">N</a>
+                <a class="map-link kakao" href="https://place.map.kakao.com/21306149" target="_blank" rel="noreferrer" aria-label="웨스틴 조선 서울 아리아 카카오맵">K</a>
+              </span>
             </span>
-          </a>
+          </article>
 
-          <a class="schedule-card" href="https://naver.me/FO9oXpNL" target="_blank" rel="noreferrer">
+          <article class="schedule-card">
             <span class="order">02</span>
             <span class="place">
               <strong>어둠속의 대화</strong>
@@ -349,11 +372,14 @@
             </span>
             <span class="card-side">
               <span class="time">시간 추후 공개</span>
-              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="map-links">
+                <a class="map-link naver" href="https://naver.me/FO9oXpNL" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 네이버 지도">N</a>
+                <a class="map-link kakao" href="https://place.map.kakao.com/11682128" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 카카오맵">K</a>
+              </span>
             </span>
-          </a>
+          </article>
 
-          <a class="schedule-card" href="https://naver.me/Gsjg0dtA" target="_blank" rel="noreferrer">
+          <article class="schedule-card">
             <span class="order">03</span>
             <span class="place">
               <strong>리얼샷</strong>
@@ -361,11 +387,14 @@
             </span>
             <span class="card-side">
               <span class="time">시간 추후 공개</span>
-              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="map-links">
+                <a class="map-link naver" href="https://naver.me/Gsjg0dtA" target="_blank" rel="noreferrer" aria-label="리얼샷 네이버 지도">N</a>
+                <a class="map-link kakao" href="https://place.map.kakao.com/1186558097" target="_blank" rel="noreferrer" aria-label="리얼샷 카카오맵">K</a>
+              </span>
             </span>
-          </a>
+          </article>
 
-          <a class="schedule-card" href="https://naver.me/58Nd4Z0W" target="_blank" rel="noreferrer">
+          <article class="schedule-card">
             <span class="order">04</span>
             <span class="place">
               <strong>이들스</strong>
@@ -373,9 +402,12 @@
             </span>
             <span class="card-side">
               <span class="time">시간 추후 공개</span>
-              <span class="arrow" aria-hidden="true">↗</span>
+              <span class="map-links">
+                <a class="map-link naver" href="https://naver.me/58Nd4Z0W" target="_blank" rel="noreferrer" aria-label="이들스 네이버 지도">N</a>
+                <a class="map-link kakao" href="https://place.map.kakao.com/572289250" target="_blank" rel="noreferrer" aria-label="이들스 카카오맵">K</a>
+              </span>
             </span>
-          </a>
+          </article>
         </div>
       </section>
 
