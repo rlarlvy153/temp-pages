@@ -214,17 +214,48 @@
       }
 
       .team-placeholder {
-        display: flex;
+        display: grid;
         min-height: 120px;
-        align-items: center;
-        justify-content: center;
+        place-items: center;
         border: 1px dashed rgba(255, 255, 255, 0.35);
         border-radius: 16px;
         background: rgba(255, 255, 255, 0.06);
         color: rgba(255, 255, 255, 0.78);
-        font-size: 14px;
-        font-weight: 700;
         text-align: center;
+      }
+
+      .countdown-label {
+        margin: 0 0 10px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .countdown {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .countdown strong {
+        font-size: clamp(20px, 4vw, 30px);
+        letter-spacing: -0.04em;
+      }
+
+      .countdown span {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .reveal-message {
+        margin: 0;
+        color: white;
+        font-size: clamp(20px, 4vw, 30px);
+        font-weight: 800;
+        letter-spacing: -0.04em;
       }
 
       footer {
@@ -351,12 +382,55 @@
       <section class="teams" aria-labelledby="teams-title">
         <div>
           <h2 id="teams-title">우리 조는?</h2>
-          <p class="teams-copy">플레이샵을 함께할 조 구성과 세부 안내가 이곳에 추가될 예정입니다.</p>
+          <p class="teams-copy">9월 29일 오후 12시에 공개됩니다.</p>
         </div>
-        <div class="team-placeholder">조 편성 · COMING SOON</div>
+        <div class="team-placeholder" id="team-reveal" aria-live="polite">
+          <div>
+            <p class="countdown-label">조 편성 공개까지</p>
+            <div class="countdown" id="countdown">
+              <strong id="days">00</strong><span>일</span>
+              <strong id="hours">00</strong><span>시간</span>
+              <strong id="minutes">00</strong><span>분</span>
+              <strong id="seconds">00</strong><span>초</span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer>숏폼&amp;피드플랫폼 스쿼드 · PLAYSHOP</footer>
     </main>
+
+    <script>
+      const revealAt = new Date("2026-09-29T12:00:00+09:00").getTime();
+      const revealArea = document.querySelector("#team-reveal");
+      const countdown = {
+        days: document.querySelector("#days"),
+        hours: document.querySelector("#hours"),
+        minutes: document.querySelector("#minutes"),
+        seconds: document.querySelector("#seconds"),
+      };
+      let timer;
+
+      function updateCountdown() {
+        const remaining = revealAt - Date.now();
+
+        if (remaining <= 0) {
+          revealArea.innerHTML = '<p class="reveal-message">미리 까보지 마세요</p>';
+          clearInterval(timer);
+          return;
+        }
+
+        const totalSeconds = Math.floor(remaining / 1000);
+        countdown.days.textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
+        countdown.hours.textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
+        countdown.minutes.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+        countdown.seconds.textContent = String(totalSeconds % 60).padStart(2, "0");
+      }
+
+      updateCountdown();
+      if (Date.now() < revealAt) {
+        timer = setInterval(updateCountdown, 1000);
+      }
+    </script>
   </body>
 </html>
