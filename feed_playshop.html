@@ -211,6 +211,122 @@
         color: #191919;
       }
 
+      .event-info {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 12px;
+        margin-top: 70px;
+      }
+
+      .dress-code,
+      .prizes {
+        padding: 30px;
+        border-radius: 24px;
+      }
+
+      .dress-code {
+        display: flex;
+        min-height: 280px;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #fee500;
+        color: #191919;
+      }
+
+      .info-label {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+      }
+
+      .dress-code strong {
+        font-size: clamp(36px, 6vw, 54px);
+        line-height: 0.9;
+        letter-spacing: -0.07em;
+      }
+
+      .dress-code .info-label {
+        font-size: 16px;
+      }
+
+      .dress-code span {
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .dress-example {
+        margin: 20px 0;
+      }
+
+      .dress-example img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 2px solid rgba(25, 25, 25, 0.85);
+        border-radius: 16px;
+      }
+
+      .dress-example figcaption {
+        margin-top: 8px;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-align: right;
+      }
+
+      .prizes {
+        background: var(--ink);
+        color: white;
+      }
+
+      .prize-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .prize-coming {
+        display: grid;
+        min-height: 220px;
+        margin-top: 24px;
+        place-items: center;
+        border: 1px dashed rgba(255, 255, 255, 0.28);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.06);
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .prize-coming .prize-list {
+        width: 100%;
+        margin-top: 0;
+      }
+
+      .prize-item {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        align-items: center;
+        min-height: 58px;
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .prize-item span {
+        color: #fee500;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .prize-item strong {
+        font-size: 16px;
+        letter-spacing: -0.025em;
+      }
+
       .teams {
         display: grid;
         grid-template-columns: 1fr 1.4fr;
@@ -323,6 +439,15 @@
           margin-top: 54px;
           padding: 26px 22px;
         }
+
+        .event-info {
+          grid-template-columns: 1fr;
+          margin-top: 54px;
+        }
+
+        .dress-code {
+          min-height: 230px;
+        }
       }
     </style>
   </head>
@@ -411,6 +536,33 @@
         </div>
       </section>
 
+      <section class="event-info" aria-label="드레스코드와 상품 안내">
+        <div class="dress-code">
+          <p class="info-label">DRESS CODE</p>
+          <strong>YELLOW</strong>
+          <figure class="dress-example">
+            <img src="https://img.wkorea.com/w/2018/09/style_5ba0674d8cf2d.jpg" alt="옐로우 드레스코드 스타일 예시" loading="lazy" />
+            <figcaption>YELLOW STYLE REFERENCE</figcaption>
+          </figure>
+          <span>오늘의 포인트 컬러는 옐로우 💛</span>
+        </div>
+
+        <div class="prizes">
+          <p class="info-label">PRIZES</p>
+          <div class="prize-coming" id="prize-reveal" aria-live="polite">
+            <div>
+              <p class="countdown-label">상품 공개까지</p>
+              <div class="countdown">
+                <strong id="prize-days">00</strong><span>일</span>
+                <strong id="prize-hours">00</strong><span>시간</span>
+                <strong id="prize-minutes">00</strong><span>분</span>
+                <strong id="prize-seconds">00</strong><span>초</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="teams" aria-labelledby="teams-title">
         <div>
           <h2 id="teams-title">우리 조는?</h2>
@@ -435,28 +587,47 @@
     <script>
       const revealAt = new Date("2026-09-29T12:00:00+09:00").getTime();
       const revealArea = document.querySelector("#team-reveal");
-      const countdown = {
+      const prizeRevealArea = document.querySelector("#prize-reveal");
+      const teamCountdown = {
         days: document.querySelector("#days"),
         hours: document.querySelector("#hours"),
         minutes: document.querySelector("#minutes"),
         seconds: document.querySelector("#seconds"),
       };
+      const prizeCountdown = {
+        days: document.querySelector("#prize-days"),
+        hours: document.querySelector("#prize-hours"),
+        minutes: document.querySelector("#prize-minutes"),
+        seconds: document.querySelector("#prize-seconds"),
+      };
       let timer;
+
+      function renderTime(target, totalSeconds) {
+        target.days.textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
+        target.hours.textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
+        target.minutes.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+        target.seconds.textContent = String(totalSeconds % 60).padStart(2, "0");
+      }
 
       function updateCountdown() {
         const remaining = revealAt - Date.now();
 
         if (remaining <= 0) {
           revealArea.innerHTML = '<p class="reveal-message">미리 까보지 마세요</p>';
+          prizeRevealArea.innerHTML = `
+            <div class="prize-list">
+              <div class="prize-item"><span>01</span><strong>베스트 드레서상</strong></div>
+              <div class="prize-item"><span>02</span><strong>포토그래퍼상</strong></div>
+              <div class="prize-item"><span>03</span><strong>양궁·사격 점수 팀 대전</strong></div>
+            </div>
+          `;
           clearInterval(timer);
           return;
         }
 
         const totalSeconds = Math.floor(remaining / 1000);
-        countdown.days.textContent = String(Math.floor(totalSeconds / 86400)).padStart(2, "0");
-        countdown.hours.textContent = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, "0");
-        countdown.minutes.textContent = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-        countdown.seconds.textContent = String(totalSeconds % 60).padStart(2, "0");
+        renderTime(teamCountdown, totalSeconds);
+        renderTime(prizeCountdown, totalSeconds);
       }
 
       updateCountdown();
