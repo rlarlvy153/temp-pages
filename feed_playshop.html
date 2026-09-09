@@ -35,9 +35,46 @@
       }
 
       .page {
+        position: relative;
+        z-index: 1;
         width: min(100% - 40px, 980px);
         margin: 0 auto;
         padding: 28px 0 80px;
+      }
+
+      .chick-rain {
+        position: fixed;
+        z-index: 0;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .rain-chick {
+        position: absolute;
+        top: -120px;
+        width: var(--size);
+        height: auto;
+        opacity: 0;
+        filter: drop-shadow(0 6px 8px rgba(67, 45, 8, 0.12));
+        animation: chick-fall var(--duration) linear forwards;
+      }
+
+      @keyframes chick-fall {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, -120px, 0) rotate(-10deg);
+        }
+        10% {
+          opacity: 0.38;
+        }
+        90% {
+          opacity: 0.38;
+        }
+        100% {
+          opacity: 0;
+          transform: translate3d(var(--drift), calc(100vh + 180px), 0) rotate(24deg);
+        }
       }
 
       .topbar {
@@ -401,6 +438,37 @@
         text-align: center;
       }
 
+      .chick-pop {
+        position: fixed;
+        z-index: 9999;
+        width: 76px;
+        height: auto;
+        pointer-events: none;
+        user-select: none;
+        transform: translate(-50%, -50%) scale(0.25) rotate(-8deg);
+        filter: drop-shadow(0 8px 12px rgba(67, 45, 8, 0.2));
+        animation: chick-pop 900ms cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+      }
+
+      @keyframes chick-pop {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -40%) scale(0.25) rotate(-8deg);
+        }
+        35% {
+          opacity: 1;
+          transform: translate(-50%, -65%) scale(1.08) rotate(5deg);
+        }
+        72% {
+          opacity: 1;
+          transform: translate(-50%, -70%) scale(1) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(-50%, -105%) scale(0.88) rotate(4deg);
+        }
+      }
+
       @media (max-width: 640px) {
         .page {
           width: min(100% - 28px, 980px);
@@ -452,6 +520,7 @@
     </style>
   </head>
   <body>
+    <div class="chick-rain" id="chick-rain" aria-hidden="true"></div>
     <main class="page">
       <header class="topbar">
         <div class="logo">SHORTFORM &amp; FEED PLATFORM</div>
@@ -481,7 +550,7 @@
               <span>점심 식사</span>
             </span>
             <span class="card-side">
-              <span class="time">시간 추후 공개</span>
+              <span class="time">11:15–13:00</span>
               <span class="map-links">
                 <a class="map-link naver" href="https://naver.me/FXwGVuvg" target="_blank" rel="noreferrer" aria-label="웨스틴 조선 서울 아리아 네이버 지도">N</a>
                 <a class="map-link kakao" href="https://place.map.kakao.com/21306149" target="_blank" rel="noreferrer" aria-label="웨스틴 조선 서울 아리아 카카오맵">K</a>
@@ -634,6 +703,39 @@
       if (Date.now() < revealAt) {
         timer = setInterval(updateCountdown, 1000);
       }
+
+      const chickRain = document.querySelector("#chick-rain");
+
+      function dropChick(delay = 0) {
+        window.setTimeout(() => {
+          const chick = document.createElement("img");
+          chick.className = "rain-chick";
+          chick.src = "assets/chick-transparent.png";
+          chick.alt = "";
+          chick.style.left = `${Math.random() * 100}%`;
+          chick.style.setProperty("--size", `${34 + Math.random() * 46}px`);
+          chick.style.setProperty("--duration", `${7 + Math.random() * 6}s`);
+          chick.style.setProperty("--drift", `${-70 + Math.random() * 140}px`);
+          chickRain.appendChild(chick);
+          chick.addEventListener("animationend", () => chick.remove());
+        }, delay);
+      }
+
+      for (let index = 0; index < 12; index += 1) {
+        dropChick(index * 650);
+      }
+      window.setInterval(dropChick, 800);
+
+      document.addEventListener("click", (event) => {
+        const chick = document.createElement("img");
+        chick.className = "chick-pop";
+        chick.src = "assets/chick-transparent.png";
+        chick.alt = "";
+        chick.style.left = `${event.clientX}px`;
+        chick.style.top = `${event.clientY}px`;
+        document.body.appendChild(chick);
+        chick.addEventListener("animationend", () => chick.remove());
+      });
     </script>
   </body>
 </html>
