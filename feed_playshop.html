@@ -250,6 +250,92 @@
         color: #191919;
       }
 
+      .schedule-card.split {
+        grid-template-columns: 58px minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .split-content {
+        min-width: 0;
+      }
+
+      .split-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .split-heading strong {
+        font-size: 20px;
+        letter-spacing: -0.035em;
+      }
+
+      .branch-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .branch-option {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #faf7f0;
+      }
+
+      .branch-option:nth-child(2) {
+        background: #f0f6f2;
+      }
+
+      .branch-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .branch-title strong {
+        display: block;
+        font-size: 18px;
+        letter-spacing: -0.035em;
+      }
+
+      .branch-title span {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .member-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 18px 0 9px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .member-list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+      }
+
+      .member {
+        padding: 7px 4px;
+        border-radius: 8px;
+        background: white;
+        color: #55524c;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: center;
+        white-space: nowrap;
+      }
+
       .event-info {
         display: grid;
         grid-template-columns: 0.8fr 1.2fr;
@@ -504,6 +590,27 @@
           justify-content: space-between;
         }
 
+        .schedule-card.split {
+          grid-template-columns: 38px minmax(0, 1fr);
+        }
+
+        .split-heading {
+          display: block;
+        }
+
+        .split-heading .time {
+          display: inline-block;
+          margin-top: 10px;
+        }
+
+        .branch-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .member-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .teams {
           grid-template-columns: 1fr;
           margin-top: 54px;
@@ -560,19 +667,56 @@
             </span>
           </article>
 
-          <article class="schedule-card">
+          <article class="schedule-card split">
             <span class="order">02</span>
-            <span class="place">
-              <strong>어둠속의 대화</strong>
-              <span>체험</span>
-            </span>
-            <span class="card-side">
-              <span class="time">시간 추후 공개</span>
-              <span class="map-links">
-                <a class="map-link naver" href="https://naver.me/FO9oXpNL" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 네이버 지도">N</a>
-                <a class="map-link kakao" href="https://place.map.kakao.com/11682128" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 카카오맵">K</a>
-              </span>
-            </span>
+            <div class="split-content">
+              <div class="split-heading">
+                <strong>두 코스로 나눠서 출발해요</strong>
+                <span class="time">시간 추후 공개</span>
+              </div>
+
+              <div class="branch-grid">
+                <section class="branch-option">
+                  <div class="branch-top">
+                    <div class="branch-title">
+                      <strong>어둠속의 대화</strong>
+                      <span>16명</span>
+                    </div>
+                    <span class="map-links">
+                      <a class="map-link naver" href="https://naver.me/FO9oXpNL" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 네이버 지도">N</a>
+                      <a class="map-link kakao" href="https://place.map.kakao.com/11682128" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 카카오맵">K</a>
+                    </span>
+                  </div>
+                  <div class="member-heading"><span>TEAM MEMBERS</span><span>16</span></div>
+                  <div class="member-list">
+                    <span class="member">팀원 01</span><span class="member">팀원 02</span>
+                    <span class="member">팀원 03</span><span class="member">팀원 04</span>
+                    <span class="member">팀원 05</span><span class="member">팀원 06</span>
+                    <span class="member">팀원 07</span><span class="member">팀원 08</span>
+                    <span class="member">팀원 09</span><span class="member">팀원 10</span>
+                    <span class="member">팀원 11</span><span class="member">팀원 12</span>
+                    <span class="member">팀원 13</span><span class="member">팀원 14</span>
+                    <span class="member">팀원 15</span><span class="member">팀원 16</span>
+                  </div>
+                </section>
+
+                <section class="branch-option">
+                  <div class="branch-top">
+                    <div class="branch-title">
+                      <strong>런닝맨</strong>
+                      <span>7명</span>
+                    </div>
+                  </div>
+                  <div class="member-heading"><span>TEAM MEMBERS</span><span>7</span></div>
+                  <div class="member-list">
+                    <span class="member">팀원 17</span><span class="member">팀원 18</span>
+                    <span class="member">팀원 19</span><span class="member">팀원 20</span>
+                    <span class="member">팀원 21</span><span class="member">팀원 22</span>
+                    <span class="member">팀원 23</span>
+                  </div>
+                </section>
+              </div>
+            </div>
           </article>
 
           <article class="schedule-card">
