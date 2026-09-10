@@ -325,6 +325,40 @@
         gap: 6px;
       }
 
+      .session-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .session {
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .session-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 9px;
+      }
+
+      .session-head strong {
+        font-size: 12px;
+      }
+
+      .session-head span {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .session .member-list {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
       .member {
         padding: 7px 4px;
         border-radius: 8px;
@@ -611,6 +645,10 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .session .member-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .teams {
           grid-template-columns: 1fr;
           margin-top: 54px;
@@ -680,23 +718,38 @@
                   <div class="branch-top">
                     <div class="branch-title">
                       <strong>어둠속의 대화</strong>
-                      <span>16명</span>
+                      <span>2회차 · 총 16명 · 러닝타임 100분</span>
                     </div>
                     <span class="map-links">
                       <a class="map-link naver" href="https://naver.me/FO9oXpNL" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 네이버 지도">N</a>
                       <a class="map-link kakao" href="https://place.map.kakao.com/11682128" target="_blank" rel="noreferrer" aria-label="어둠속의 대화 카카오맵">K</a>
                     </span>
                   </div>
-                  <div class="member-heading"><span>TEAM MEMBERS</span><span>16</span></div>
-                  <div class="member-list">
-                    <span class="member">팀원 01</span><span class="member">팀원 02</span>
-                    <span class="member">팀원 03</span><span class="member">팀원 04</span>
-                    <span class="member">팀원 05</span><span class="member">팀원 06</span>
-                    <span class="member">팀원 07</span><span class="member">팀원 08</span>
-                    <span class="member">팀원 09</span><span class="member">팀원 10</span>
-                    <span class="member">팀원 11</span><span class="member">팀원 12</span>
-                    <span class="member">팀원 13</span><span class="member">팀원 14</span>
-                    <span class="member">팀원 15</span><span class="member">팀원 16</span>
+                  <div class="session-list">
+                    <section class="session">
+                      <div class="session-head">
+                        <strong>1회차 · 8명</strong>
+                        <span>13:30–15:10</span>
+                      </div>
+                      <div class="member-list">
+                        <span class="member">팀원 01</span><span class="member">팀원 02</span>
+                        <span class="member">팀원 03</span><span class="member">팀원 04</span>
+                        <span class="member">팀원 05</span><span class="member">팀원 06</span>
+                        <span class="member">팀원 07</span><span class="member">팀원 08</span>
+                      </div>
+                    </section>
+                    <section class="session">
+                      <div class="session-head">
+                        <strong>2회차 · 8명</strong>
+                        <span>13:45–15:25</span>
+                      </div>
+                      <div class="member-list">
+                        <span class="member">팀원 09</span><span class="member">팀원 10</span>
+                        <span class="member">팀원 11</span><span class="member">팀원 12</span>
+                        <span class="member">팀원 13</span><span class="member">팀원 14</span>
+                        <span class="member">팀원 15</span><span class="member">팀원 16</span>
+                      </div>
+                    </section>
                   </div>
                 </section>
 
@@ -704,7 +757,7 @@
                   <div class="branch-top">
                     <div class="branch-title">
                       <strong>런닝맨</strong>
-                      <span>7명</span>
+                      <span>14:00–15:30 · 7명 · 러닝타임 90분</span>
                     </div>
                   </div>
                   <div class="member-heading"><span>TEAM MEMBERS</span><span>7</span></div>
