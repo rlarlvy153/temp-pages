@@ -464,6 +464,11 @@
         margin-top: 70px;
       }
 
+      .hero + .event-info {
+        margin-top: 0;
+        margin-bottom: 70px;
+      }
+
       .dress-code,
       .prizes {
         padding: 30px;
@@ -775,6 +780,29 @@
         <h1>숏폼&amp;피드플랫폼<br />스쿼드</h1>
       </section>
 
+      <section class="event-info" aria-label="드레스코드와 상품 안내">
+        <div class="dress-code">
+          <p class="info-label">DRESS CODE</p>
+          <strong>YELLOW</strong>
+          <span>오늘의 포인트 컬러는 옐로우 💛</span>
+        </div>
+
+        <div class="prizes">
+          <p class="info-label">PRIZES</p>
+          <div class="prize-coming" id="prize-reveal" aria-live="polite">
+            <div>
+              <p class="countdown-label">상품 공개까지</p>
+              <div class="countdown">
+                <strong id="prize-days">00</strong><span>일</span>
+                <strong id="prize-hours">00</strong><span>시간</span>
+                <strong id="prize-minutes">00</strong><span>분</span>
+                <strong id="prize-seconds">00</strong><span>초</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section aria-labelledby="schedule-title">
         <div class="section-heading">
           <h2 id="schedule-title">오늘의 일정</h2>
@@ -937,33 +965,6 @@
         </div>
       </section>
 
-      <section class="event-info" aria-label="드레스코드와 상품 안내">
-        <div class="dress-code">
-          <p class="info-label">DRESS CODE</p>
-          <strong>YELLOW</strong>
-          <figure class="dress-example">
-            <img src="https://img.wkorea.com/w/2018/09/style_5ba0674d8cf2d.jpg" alt="옐로우 드레스코드 스타일 예시" loading="lazy" />
-            <figcaption>YELLOW STYLE REFERENCE</figcaption>
-          </figure>
-          <span>오늘의 포인트 컬러는 옐로우 💛</span>
-        </div>
-
-        <div class="prizes">
-          <p class="info-label">PRIZES</p>
-          <div class="prize-coming" id="prize-reveal" aria-live="polite">
-            <div>
-              <p class="countdown-label">상품 공개까지</p>
-              <div class="countdown">
-                <strong id="prize-days">00</strong><span>일</span>
-                <strong id="prize-hours">00</strong><span>시간</span>
-                <strong id="prize-minutes">00</strong><span>분</span>
-                <strong id="prize-seconds">00</strong><span>초</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <footer>숏폼&amp;피드플랫폼 스쿼드 · PLAYSHOP</footer>
     </main>
 
@@ -1025,13 +1026,7 @@
             area.className = "member-countdown";
             area.innerHTML = '<p class="reveal-message">미리 까보지 마세요</p>';
           });
-          prizeRevealArea.innerHTML = `
-            <div class="prize-list">
-              <div class="prize-item"><span>01</span><strong>베스트 드레서상</strong></div>
-              <div class="prize-item"><span>02</span><strong>포토그래퍼상</strong></div>
-              <div class="prize-item"><span>03</span><strong>양궁·사격 점수 팀 대전</strong></div>
-            </div>
-          `;
+          prizeRevealArea.innerHTML = '<p class="reveal-message">미리 까보지 마세요</p>';
           clearInterval(timer);
           return;
         }
