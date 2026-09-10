@@ -387,6 +387,42 @@
         white-space: nowrap;
       }
 
+      .mission-card {
+        align-items: start;
+      }
+
+      .mission-card .card-side {
+        justify-self: end;
+      }
+
+      .mission-list {
+        display: grid;
+        grid-column: 2 / -1;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .mission-item {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: 8px;
+        align-items: start;
+        padding: 12px;
+        border-radius: 12px;
+        background: #f7f0df;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.45;
+        word-break: keep-all;
+      }
+
+      .mission-item span {
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 900;
+      }
+
       .event-info {
         display: grid;
         grid-template-columns: 0.8fr 1.2fr;
@@ -666,6 +702,15 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .mission-card .card-side {
+          justify-self: stretch;
+        }
+
+        .mission-list {
+          grid-column: 2;
+          grid-template-columns: 1fr;
+        }
+
         .teams {
           grid-template-columns: 1fr;
           margin-top: 54px;
@@ -783,14 +828,37 @@
             </div>
           </article>
 
-          <article class="schedule-card">
+          <article class="schedule-card mission-card">
             <span class="order">03</span>
+            <span class="place">
+              <strong>이동 및 조별 미션</strong>
+              <span>다음 장소로 이동하며 미션 진행</span>
+            </span>
+            <span class="card-side">
+              <span class="time">15:30–17:00</span>
+            </span>
+            <div class="mission-list">
+              <div class="mission-item"><span>01</span>옐로우 아이템 4개 찾아 단체 사진 찍기</div>
+              <div class="mission-item"><span>02</span>네 명이 동시에 등장하는 짧은 챌린지 영상 찍기</div>
+              <div class="mission-item"><span>03</span>유명 앨범이나 영화 포스터 재현하기</div>
+              <div class="mission-item"><span>04</span>이동 중 가장 웃긴 순간을 4컷 사진으로 만들기</div>
+              <div class="mission-item"><span>05</span>병아리 포즈로 단체 사진 찍기</div>
+              <div class="mission-item"><span>06</span>출발·도착을 방송처럼 “휭~” 해서 창의적으로 찍기</div>
+              <div class="mission-item"><span>07</span>인생네컷 찍기</div>
+              <div class="mission-item"><span>08</span>주변 간판 글자를 조합해 스쿼드 이름 만들기 · 글자마다 최소 1명 등장</div>
+              <div class="mission-item"><span>09</span>목적지까지 가는 길을 타임랩스로 표현하기</div>
+              <div class="mission-item"><span>10</span>팀 전원이 점프한 순간을 사진 한 장에 담기</div>
+            </div>
+          </article>
+
+          <article class="schedule-card">
+            <span class="order">04</span>
             <span class="place">
               <strong>리얼샷</strong>
               <span>액티비티</span>
             </span>
             <span class="card-side">
-              <span class="time">14:00–15:00</span>
+              <span class="time">17:00–18:00</span>
               <span class="map-links">
                 <a class="map-link naver" href="https://naver.me/Gsjg0dtA" target="_blank" rel="noreferrer" aria-label="리얼샷 네이버 지도">N</a>
                 <a class="map-link kakao" href="https://place.map.kakao.com/1186558097" target="_blank" rel="noreferrer" aria-label="리얼샷 카카오맵">K</a>
@@ -799,13 +867,13 @@
           </article>
 
           <article class="schedule-card">
-            <span class="order">04</span>
+            <span class="order">05</span>
             <span class="place">
               <strong>이들스</strong>
               <span>마무리</span>
             </span>
             <span class="card-side">
-              <span class="time">시간 추후 공개</span>
+              <span class="time">18:30–자유</span>
               <span class="map-links">
                 <a class="map-link naver" href="https://naver.me/58Nd4Z0W" target="_blank" rel="noreferrer" aria-label="이들스 네이버 지도">N</a>
                 <a class="map-link kakao" href="https://place.map.kakao.com/572289250" target="_blank" rel="noreferrer" aria-label="이들스 카카오맵">K</a>
