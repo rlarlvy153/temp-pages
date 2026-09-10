@@ -204,11 +204,19 @@
       }
 
       .performance-link {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         margin-top: 7px;
         color: var(--ink);
         font-weight: 800;
         text-underline-offset: 3px;
+      }
+
+      .instagram-icon {
+        width: 19px;
+        height: 19px;
+        flex: 0 0 auto;
       }
 
       .card-side {
@@ -668,6 +676,52 @@
         animation: chick-pop 900ms cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
       }
 
+      .custom-cursor {
+        position: fixed;
+        z-index: 10000;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 54px;
+        height: 50px;
+        opacity: 0;
+        pointer-events: none;
+        will-change: transform;
+      }
+
+      .custom-cursor img {
+        position: absolute;
+        top: 8px;
+        left: 12px;
+        width: 42px;
+        height: auto;
+        filter: drop-shadow(0 4px 5px rgba(67, 45, 8, 0.2));
+      }
+
+      .custom-cursor::before {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 17px;
+        height: 23px;
+        background: var(--ink);
+        clip-path: polygon(0 0, 100% 68%, 60% 72%, 79% 100%, 59% 100%, 40% 75%, 0 100%);
+        content: "";
+        filter: drop-shadow(0 1px 0 white);
+      }
+
+      @media (pointer: fine) {
+        body,
+        a {
+          cursor: none;
+        }
+
+        .custom-cursor {
+          display: block;
+        }
+      }
+
       @keyframes chick-pop {
         0% {
           opacity: 0;
@@ -773,6 +827,9 @@
   </head>
   <body>
     <div class="chick-rain" id="chick-rain" aria-hidden="true"></div>
+    <div class="custom-cursor" id="custom-cursor" aria-hidden="true">
+      <img src="assets/chick-transparent.png" alt="" />
+    </div>
     <main class="page">
       <header class="topbar">
         <div class="logo">SHORTFORM &amp; FEED PLATFORM</div>
@@ -817,7 +874,7 @@
             <span class="order">01</span>
             <span class="place">
               <strong>웨스틴 조선 서울 아리아</strong>
-              <span>점심 식사</span>
+              <span>호텔 입구에서 단체 사진 및 점심 식사</span>
             </span>
             <span class="card-side">
               <span class="time">11:15–13:00</span>
@@ -955,7 +1012,14 @@
                 자유 관람 및 알아서 귀가하기<br />
                 공연 19:30–21:30 · 해외 아티스트 특집<br />
                 Thierry Maillard X Stephane Belmondo<br />
-                <a class="performance-link" href="https://www.instagram.com/p/DcfJXD0piJd/" target="_blank" rel="noreferrer">공연 정보 보기 ↗</a>
+                <a class="performance-link" href="https://www.instagram.com/p/DcfJXD0piJd/" target="_blank" rel="noreferrer">
+                  <svg class="instagram-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2" />
+                    <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2" />
+                    <circle cx="17.5" cy="6.8" r="1.2" fill="currentColor" />
+                  </svg>
+                  공연 정보 보기 ↗
+                </a>
               </span>
             </span>
             <span class="card-side">
@@ -1066,6 +1130,17 @@
         dropChick(index * 650);
       }
       window.setInterval(dropChick, 800);
+
+      const customCursor = document.querySelector("#custom-cursor");
+
+      document.addEventListener("mousemove", (event) => {
+        customCursor.style.opacity = "1";
+        customCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+      });
+
+      document.documentElement.addEventListener("mouseleave", () => {
+        customCursor.style.opacity = "0";
+      });
 
       document.addEventListener("click", (event) => {
         const chick = document.createElement("img");
