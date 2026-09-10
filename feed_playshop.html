@@ -210,12 +210,12 @@
       }
 
       .time {
-        padding: 8px 11px;
-        border-radius: 999px;
-        background: var(--accent-soft);
-        color: #a72d16;
-        font-size: 12px;
-        font-weight: 800;
+        padding: 0;
+        background: transparent;
+        color: var(--ink);
+        font-size: 21px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
         white-space: nowrap;
       }
 
@@ -342,7 +342,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        margin-bottom: 9px;
+        margin-bottom: 15px;
       }
 
       .session-head strong {
@@ -350,9 +350,26 @@
       }
 
       .session-head span {
-        color: var(--muted);
-        font-size: 11px;
-        font-weight: 700;
+        color: var(--ink);
+        font-size: 17px;
+        font-weight: 900;
+        letter-spacing: -0.035em;
+      }
+
+      .branch-time {
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        text-align: center;
+      }
+
+      .branch-time + .member-list {
+        margin-top: 16px;
       }
 
       .session .member-list {
@@ -676,17 +693,12 @@
 
       <section class="hero">
         <p class="eyebrow">SQUAD PLAYSHOP</p>
-        <h1>같이 먹고,<br />보고, 즐기는 날.</h1>
-        <p class="hero-copy">
-          숏폼&amp;피드플랫폼 스쿼드 플레이샵 일정과 조 편성을 안내합니다.
-          상세 시간과 조 구성은 확정되는 대로 업데이트할게요.
-        </p>
+        <h1>숏폼&amp;피드플랫폼<br />스쿼드</h1>
       </section>
 
       <section aria-labelledby="schedule-title">
         <div class="section-heading">
           <h2 id="schedule-title">오늘의 일정</h2>
-          <p class="section-note">N은 네이버 지도, K는 카카오맵으로 연결됩니다.</p>
         </div>
 
         <div class="schedule">
@@ -708,11 +720,6 @@
           <article class="schedule-card split">
             <span class="order">02</span>
             <div class="split-content">
-              <div class="split-heading">
-                <strong>두 코스로 나눠서 출발해요</strong>
-                <span class="time">시간 추후 공개</span>
-              </div>
-
               <div class="branch-grid">
                 <section class="branch-option">
                   <div class="branch-top">
@@ -757,10 +764,14 @@
                   <div class="branch-top">
                     <div class="branch-title">
                       <strong>런닝맨</strong>
-                      <span>14:00–15:30 · 7명 · 러닝타임 90분</span>
+                      <span>7명 · 러닝타임 90분</span>
                     </div>
+                    <span class="map-links">
+                      <a class="map-link naver" href="https://naver.me/xq3aT1AM" target="_blank" rel="noreferrer" aria-label="런닝맨 네이버 지도">N</a>
+                      <a class="map-link kakao" href="https://place.map.kakao.com/649534068" target="_blank" rel="noreferrer" aria-label="런닝맨 카카오맵">K</a>
+                    </span>
                   </div>
-                  <div class="member-heading"><span>TEAM MEMBERS</span><span>7</span></div>
+                  <div class="branch-time">14:00–15:30</div>
                   <div class="member-list">
                     <span class="member">팀원 17</span><span class="member">팀원 18</span>
                     <span class="member">팀원 19</span><span class="member">팀원 20</span>
@@ -779,7 +790,7 @@
               <span>액티비티</span>
             </span>
             <span class="card-side">
-              <span class="time">시간 추후 공개</span>
+              <span class="time">14:00–15:00</span>
               <span class="map-links">
                 <a class="map-link naver" href="https://naver.me/Gsjg0dtA" target="_blank" rel="noreferrer" aria-label="리얼샷 네이버 지도">N</a>
                 <a class="map-link kakao" href="https://place.map.kakao.com/1186558097" target="_blank" rel="noreferrer" aria-label="리얼샷 카카오맵">K</a>
