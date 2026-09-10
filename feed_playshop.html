@@ -395,6 +395,32 @@
         white-space: nowrap;
       }
 
+      .member-countdown {
+        display: grid;
+        min-height: 104px;
+        place-items: center;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        background: white;
+        text-align: center;
+      }
+
+      .member-countdown .countdown-label {
+        color: var(--muted);
+      }
+
+      .member-countdown .countdown {
+        color: var(--ink);
+      }
+
+      .member-countdown .reveal-message {
+        color: var(--ink);
+      }
+
+      .branch-time + .member-countdown {
+        margin-top: 16px;
+      }
+
       .mission-card {
         align-items: start;
       }
@@ -791,11 +817,16 @@
                         <strong>1회차 · 8명</strong>
                         <span>13:30–15:10</span>
                       </div>
-                      <div class="member-list">
-                        <span class="member">팀원 01</span><span class="member">팀원 02</span>
-                        <span class="member">팀원 03</span><span class="member">팀원 04</span>
-                        <span class="member">팀원 05</span><span class="member">팀원 06</span>
-                        <span class="member">팀원 07</span><span class="member">팀원 08</span>
+                      <div class="member-countdown" id="dark-first-reveal" aria-live="polite">
+                        <div>
+                          <p class="countdown-label">조 편성 공개까지</p>
+                          <div class="countdown">
+                            <strong id="dark-first-days">00</strong><span>일</span>
+                            <strong id="dark-first-hours">00</strong><span>시간</span>
+                            <strong id="dark-first-minutes">00</strong><span>분</span>
+                            <strong id="dark-first-seconds">00</strong><span>초</span>
+                          </div>
+                        </div>
                       </div>
                     </section>
                     <section class="session">
@@ -803,11 +834,16 @@
                         <strong>2회차 · 8명</strong>
                         <span>13:45–15:25</span>
                       </div>
-                      <div class="member-list">
-                        <span class="member">팀원 09</span><span class="member">팀원 10</span>
-                        <span class="member">팀원 11</span><span class="member">팀원 12</span>
-                        <span class="member">팀원 13</span><span class="member">팀원 14</span>
-                        <span class="member">팀원 15</span><span class="member">팀원 16</span>
+                      <div class="member-countdown" id="dark-second-reveal" aria-live="polite">
+                        <div>
+                          <p class="countdown-label">조 편성 공개까지</p>
+                          <div class="countdown">
+                            <strong id="dark-second-days">00</strong><span>일</span>
+                            <strong id="dark-second-hours">00</strong><span>시간</span>
+                            <strong id="dark-second-minutes">00</strong><span>분</span>
+                            <strong id="dark-second-seconds">00</strong><span>초</span>
+                          </div>
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -825,11 +861,16 @@
                     </span>
                   </div>
                   <div class="branch-time">14:00–15:30</div>
-                  <div class="member-list">
-                    <span class="member">팀원 17</span><span class="member">팀원 18</span>
-                    <span class="member">팀원 19</span><span class="member">팀원 20</span>
-                    <span class="member">팀원 21</span><span class="member">팀원 22</span>
-                    <span class="member">팀원 23</span>
+                  <div class="member-countdown" id="running-reveal" aria-live="polite">
+                    <div>
+                      <p class="countdown-label">조 편성 공개까지</p>
+                      <div class="countdown">
+                        <strong id="running-days">00</strong><span>일</span>
+                        <strong id="running-hours">00</strong><span>시간</span>
+                        <strong id="running-minutes">00</strong><span>분</span>
+                        <strong id="running-seconds">00</strong><span>초</span>
+                      </div>
+                    </div>
                   </div>
                 </section>
               </div>
@@ -840,7 +881,7 @@
             <span class="order">03</span>
             <span class="place">
               <strong>자유 이동 및 휴식</strong>
-              <span>마음에 드는 미션 1개 이상 골라서 하기</span>
+              <span>마음에 드는 미션 1개 이상 골라서 하기<br />조별 활동비 · 조당 30,000원</span>
             </span>
             <span class="card-side">
               <span class="time">15:30–17:00</span>
@@ -923,43 +964,50 @@
         </div>
       </section>
 
-      <section class="teams" aria-labelledby="teams-title">
-        <div>
-          <h2 id="teams-title">우리 조는?</h2>
-          <p class="teams-copy">9월 29일 오후 12시에 공개됩니다.</p>
-        </div>
-        <div class="team-placeholder" id="team-reveal" aria-live="polite">
-          <div>
-            <p class="countdown-label">조 편성 공개까지</p>
-            <div class="countdown" id="countdown">
-              <strong id="days">00</strong><span>일</span>
-              <strong id="hours">00</strong><span>시간</span>
-              <strong id="minutes">00</strong><span>분</span>
-              <strong id="seconds">00</strong><span>초</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <footer>숏폼&amp;피드플랫폼 스쿼드 · PLAYSHOP</footer>
     </main>
 
     <script>
       const revealAt = new Date("2026-09-29T12:00:00+09:00").getTime();
-      const revealArea = document.querySelector("#team-reveal");
       const prizeRevealArea = document.querySelector("#prize-reveal");
-      const teamCountdown = {
-        days: document.querySelector("#days"),
-        hours: document.querySelector("#hours"),
-        minutes: document.querySelector("#minutes"),
-        seconds: document.querySelector("#seconds"),
-      };
       const prizeCountdown = {
         days: document.querySelector("#prize-days"),
         hours: document.querySelector("#prize-hours"),
         minutes: document.querySelector("#prize-minutes"),
         seconds: document.querySelector("#prize-seconds"),
       };
+      const memberReveals = [
+        {
+          area: document.querySelector("#dark-first-reveal"),
+          countdown: {
+            days: document.querySelector("#dark-first-days"),
+            hours: document.querySelector("#dark-first-hours"),
+            minutes: document.querySelector("#dark-first-minutes"),
+            seconds: document.querySelector("#dark-first-seconds"),
+          },
+          members: Array.from({ length: 8 }, (_, index) => `팀원 ${String(index + 1).padStart(2, "0")}`),
+        },
+        {
+          area: document.querySelector("#dark-second-reveal"),
+          countdown: {
+            days: document.querySelector("#dark-second-days"),
+            hours: document.querySelector("#dark-second-hours"),
+            minutes: document.querySelector("#dark-second-minutes"),
+            seconds: document.querySelector("#dark-second-seconds"),
+          },
+          members: Array.from({ length: 8 }, (_, index) => `팀원 ${String(index + 9).padStart(2, "0")}`),
+        },
+        {
+          area: document.querySelector("#running-reveal"),
+          countdown: {
+            days: document.querySelector("#running-days"),
+            hours: document.querySelector("#running-hours"),
+            minutes: document.querySelector("#running-minutes"),
+            seconds: document.querySelector("#running-seconds"),
+          },
+          members: Array.from({ length: 7 }, (_, index) => `팀원 ${String(index + 17).padStart(2, "0")}`),
+        },
+      ];
       let timer;
 
       function renderTime(target, totalSeconds) {
@@ -973,7 +1021,10 @@
         const remaining = revealAt - Date.now();
 
         if (remaining <= 0) {
-          revealArea.innerHTML = '<p class="reveal-message">미리 까보지 마세요</p>';
+          memberReveals.forEach(({ area }) => {
+            area.className = "member-countdown";
+            area.innerHTML = '<p class="reveal-message">미리 까보지 마세요</p>';
+          });
           prizeRevealArea.innerHTML = `
             <div class="prize-list">
               <div class="prize-item"><span>01</span><strong>베스트 드레서상</strong></div>
@@ -986,7 +1037,7 @@
         }
 
         const totalSeconds = Math.floor(remaining / 1000);
-        renderTime(teamCountdown, totalSeconds);
+        memberReveals.forEach(({ countdown }) => renderTime(countdown, totalSeconds));
         renderTime(prizeCountdown, totalSeconds);
       }
 
