@@ -449,6 +449,11 @@
         margin-top: 18px;
       }
 
+      .mission-reveal {
+        grid-column: 2 / -1;
+        margin-top: 18px;
+      }
+
       .mission-item {
         display: grid;
         grid-template-columns: 28px minmax(0, 1fr);
@@ -467,6 +472,19 @@
         color: var(--accent);
         font-size: 11px;
         font-weight: 900;
+      }
+
+      .mission-item.award-mission {
+        border: 1px solid #e9bd28;
+        background: #fff3ba;
+      }
+
+      .mission-copy strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #8a6500;
+        font-size: 11px;
+        letter-spacing: 0.04em;
       }
 
       .event-info {
@@ -808,6 +826,10 @@
           grid-template-columns: 1fr;
         }
 
+        .mission-reveal {
+          grid-column: 2;
+        }
+
         .teams {
           grid-template-columns: 1fr;
           margin-top: 54px;
@@ -970,22 +992,21 @@
             <span class="order">03</span>
             <span class="place">
               <strong>이동 및 조별 미션</strong>
-              <span>마음에 드는 미션 1개 이상 골라서 하기<br />조별 활동비 · 조당 30,000원</span>
+              <span>조별 상품 미션 수행하기<br />조별 활동비 · 조당 30,000원</span>
             </span>
             <span class="card-side">
               <span class="time">15:30–17:00</span>
             </span>
-            <div class="mission-list">
-              <div class="mission-item"><span>01</span>옐로우 아이템 4개 찾아 단체 사진 찍기</div>
-              <div class="mission-item"><span>02</span>네 명이 동시에 등장하는 짧은 챌린지 영상 찍기</div>
-              <div class="mission-item"><span>03</span>유명 앨범이나 영화 포스터 재현하기</div>
-              <div class="mission-item"><span>04</span>이동 중 가장 웃긴 순간을 4컷 사진으로 만들기</div>
-              <div class="mission-item"><span>05</span>병아리 포즈로 단체 사진 찍기</div>
-              <div class="mission-item"><span>06</span>출발·도착 순간이동처럼 슉 찍어오기</div>
-              <div class="mission-item"><span>07</span>인생네컷 찍기</div>
-              <div class="mission-item"><span>08</span>주변 간판 글자를 조합해 스쿼드 이름 만들기 · 글자마다 최소 1명 등장</div>
-              <div class="mission-item"><span>09</span>목적지까지 가는 길을 타임랩스로 표현하기</div>
-              <div class="mission-item"><span>10</span>팀 전원이 점프한 순간을 사진 한 장에 담기</div>
+            <div class="member-countdown mission-reveal" id="mission-reveal" aria-live="polite">
+              <div>
+                <p class="countdown-label">조별 미션 공개까지</p>
+                <div class="countdown">
+                  <strong id="mission-days">00</strong><span>일</span>
+                  <strong id="mission-hours">00</strong><span>시간</span>
+                  <strong id="mission-minutes">00</strong><span>분</span>
+                  <strong id="mission-seconds">00</strong><span>초</span>
+                </div>
+              </div>
             </div>
           </article>
 
@@ -1039,11 +1060,18 @@
     <script>
       const revealAt = new Date("2026-09-29T12:00:00+09:00").getTime();
       const prizeRevealArea = document.querySelector("#prize-reveal");
+      const missionRevealArea = document.querySelector("#mission-reveal");
       const prizeCountdown = {
         days: document.querySelector("#prize-days"),
         hours: document.querySelector("#prize-hours"),
         minutes: document.querySelector("#prize-minutes"),
         seconds: document.querySelector("#prize-seconds"),
+      };
+      const missionCountdown = {
+        days: document.querySelector("#mission-days"),
+        hours: document.querySelector("#mission-hours"),
+        minutes: document.querySelector("#mission-minutes"),
+        seconds: document.querySelector("#mission-seconds"),
       };
       const memberReveals = [
         {
@@ -1095,6 +1123,7 @@
             area.innerHTML = '<p class="reveal-message">개발자 도구로 미리 훔쳐보면 바보 멍충이</p>';
           });
           prizeRevealArea.innerHTML = '<p class="reveal-message">개발자 도구로 미리 훔쳐보면 바보 멍충이</p>';
+          missionRevealArea.innerHTML = '<p class="reveal-message">개발자 도구로 미리 훔쳐보면 바보 멍충이</p>';
           clearInterval(timer);
           return;
         }
@@ -1102,6 +1131,7 @@
         const totalSeconds = Math.floor(remaining / 1000);
         memberReveals.forEach(({ countdown }) => renderTime(countdown, totalSeconds));
         renderTime(prizeCountdown, totalSeconds);
+        renderTime(missionCountdown, totalSeconds);
       }
 
       updateCountdown();
