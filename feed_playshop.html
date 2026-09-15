@@ -510,7 +510,7 @@
         min-height: 280px;
         flex-direction: column;
         justify-content: space-between;
-        background: #fee500;
+        background: linear-gradient(135deg, #fee500 0 50%, #4f8cff 50% 100%);
         color: #191919;
       }
 
@@ -865,22 +865,25 @@
 
       <section class="event-info" aria-label="드레스코드와 상품 안내">
         <div class="dress-code">
-          <p class="info-label">DRESS CODE</p>
-          <strong>YELLOW</strong>
-          <span>오늘의 포인트 컬러는 옐로우 💛</span>
+          <p class="info-label">드레스코드</p>
+          <strong>YELLOW BLUE</strong>
+          <span>오늘의 포인트 컬러는 옐로우+블루 💛💙</span>
         </div>
 
         <div class="prizes">
-          <p class="info-label">PRIZES</p>
-          <div class="prize-coming" id="prize-reveal" aria-live="polite">
-            <div>
-              <p class="countdown-label">상품 공개까지</p>
-              <div class="countdown">
-                <strong id="prize-days">00</strong><span>일</span>
-                <strong id="prize-hours">00</strong><span>시간</span>
-                <strong id="prize-minutes">00</strong><span>분</span>
-                <strong id="prize-seconds">00</strong><span>초</span>
-              </div>
+          <p class="info-label">상품</p>
+          <div class="prize-list">
+            <div class="prize-item">
+              <span>01</span>
+              <strong>베스트 드레서상 · 2명</strong>
+            </div>
+            <div class="prize-item">
+              <span>02</span>
+              <strong>팀별 미션을 가장 많이 한 팀 · 4명</strong>
+            </div>
+            <div class="prize-item">
+              <span>03</span>
+              <strong>리얼샷 평균 점수가 가장 높은 팀 · 4명</strong>
             </div>
           </div>
         </div>
@@ -963,12 +966,12 @@
                 <section class="branch-option">
                   <div class="branch-top">
                     <div class="branch-title">
-                      <strong>런닝맨</strong>
+                      <strong>런닝맨 + 다이나믹메이즈</strong>
                       <span>도보 이동 · 7명 · 러닝타임 90분</span>
                     </div>
                     <span class="map-links">
-                      <a class="map-link naver" href="https://naver.me/xq3aT1AM" target="_blank" rel="noreferrer" aria-label="런닝맨 네이버 지도">N</a>
-                      <a class="map-link kakao" href="https://place.map.kakao.com/649534068" target="_blank" rel="noreferrer" aria-label="런닝맨 카카오맵">K</a>
+                      <a class="map-link naver" href="https://naver.me/xq3aT1AM" target="_blank" rel="noreferrer" aria-label="런닝맨과 다이나믹메이즈 네이버 지도">N</a>
+                      <a class="map-link kakao" href="https://place.map.kakao.com/649534068" target="_blank" rel="noreferrer" aria-label="런닝맨과 다이나믹메이즈 카카오맵">K</a>
                     </span>
                   </div>
                   <div class="branch-time">14:00–15:30</div>
@@ -1014,7 +1017,7 @@
             <span class="order">04</span>
             <span class="place">
               <strong>리얼샷</strong>
-              <span>조별 양궁/사격 점수 대결</span>
+              <span>조별 양궁/사격 점수 대결<br />양궁 7발 + 권총 28 + 소총 32 + 저격 24 + 연사 100</span>
             </span>
             <span class="card-side">
               <span class="time">17:00–18:00</span>
@@ -1058,15 +1061,8 @@
     </main>
 
     <script>
-      const revealAt = new Date("2026-09-29T12:00:00+09:00").getTime();
-      const prizeRevealArea = document.querySelector("#prize-reveal");
+      const revealAt = new Date("2026-09-28T14:00:00+09:00").getTime();
       const missionRevealArea = document.querySelector("#mission-reveal");
-      const prizeCountdown = {
-        days: document.querySelector("#prize-days"),
-        hours: document.querySelector("#prize-hours"),
-        minutes: document.querySelector("#prize-minutes"),
-        seconds: document.querySelector("#prize-seconds"),
-      };
       const missionCountdown = {
         days: document.querySelector("#mission-days"),
         hours: document.querySelector("#mission-hours"),
@@ -1122,7 +1118,6 @@
             area.className = "member-countdown";
             area.innerHTML = '<p class="reveal-message">개발자 도구로 미리 훔쳐보면 바보 멍충이</p>';
           });
-          prizeRevealArea.innerHTML = '<p class="reveal-message">개발자 도구로 미리 훔쳐보면 바보 멍충이</p>';
           missionRevealArea.innerHTML = '<p class="reveal-message">개발자 도구로 미리 훔쳐보면 바보 멍충이</p>';
           clearInterval(timer);
           return;
@@ -1130,7 +1125,6 @@
 
         const totalSeconds = Math.floor(remaining / 1000);
         memberReveals.forEach(({ countdown }) => renderTime(countdown, totalSeconds));
-        renderTime(prizeCountdown, totalSeconds);
         renderTime(missionCountdown, totalSeconds);
       }
 
