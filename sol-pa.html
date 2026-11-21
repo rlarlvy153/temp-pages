@@ -1,1 +1,316 @@
-안녕하세요
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="게임하고, 맛있는 음식도 나눠 먹는 연말 파티에 초대해요!">
+  <meta name="theme-color" content="#fffdf8">
+  <title>연말 파티 초대장</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #26213c;
+      --muted: #5d5266;
+      --paper: #fffdf8;
+      --rule: #f0e5eb;
+      --pink: #b91859;
+      --sky: #e0f4ff;
+      --gutter: clamp(1rem, 5vw, 1.5rem);
+      font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #edf6fb;
+      color: var(--ink);
+      line-height: 1.6;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    h1, h2, p, ul, dl, dd {
+      margin: 0;
+    }
+
+    .invitation {
+      display: flex;
+      flex-direction: column;
+      width: min(100%, 30rem);
+      min-height: 100vh;
+      min-height: 100svh;
+      margin-inline: auto;
+      background: var(--paper);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      align-items: center;
+      margin: max(1rem, env(safe-area-inset-top)) var(--gutter) 0;
+      padding: 1.25rem clamp(.75rem, 4vw, 1.25rem);
+      overflow: hidden;
+      border: 1px solid #d1e9f7;
+      border-radius: 1.5rem;
+      background:
+        radial-gradient(ellipse 4.5rem 2rem at 5% 105%, #ffffffb3 99%, transparent),
+        radial-gradient(ellipse 5rem 2.5rem at 99% 104%, #ffffffb3 99%, transparent),
+        var(--sky);
+    }
+
+    h1 {
+      font-size: clamp(1.625rem, 8.2vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -.075em;
+      line-height: 1.2;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--pink);
+    }
+
+    .hero p {
+      margin-top: .625rem;
+      color: var(--muted);
+    }
+
+    .hero-art {
+      display: block;
+      width: calc(100% + .625rem);
+      aspect-ratio: 1;
+      object-fit: contain;
+      object-position: center right;
+    }
+
+    .program, .details {
+      padding: 1.375rem var(--gutter) 0;
+    }
+
+    .details {
+      padding-bottom: 1.375rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      letter-spacing: -.05em;
+      line-height: 1.4;
+    }
+
+    .program-list {
+      display: grid;
+      gap: .375rem;
+      margin-top: .625rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .program-list li {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: .625rem;
+      padding: .5rem .625rem;
+      border: 1px solid var(--rule);
+      border-radius: .875rem;
+      background: #fff;
+    }
+
+    .program-icon {
+      display: grid;
+      place-items: center;
+      width: 2.375rem;
+      height: 2.375rem;
+      border-radius: .625rem;
+      background: #ffedf5;
+      font-size: 1.125rem;
+    }
+
+    .program-list li:nth-child(2) .program-icon {
+      background: #fff3c9;
+    }
+
+    .program-list li:nth-child(3) .program-icon {
+      background: #e5f5ff;
+    }
+
+    .program-list p {
+      color: var(--muted);
+      font-size: .875rem;
+      line-height: 1.45;
+    }
+
+    .program-list strong {
+      display: block;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .625rem;
+      margin-block: .875rem 1rem;
+    }
+
+    .quick-facts > div {
+      padding: .75rem clamp(.625rem, 3.5vw, 1rem);
+      border-radius: 1rem;
+      background: #e7f6ff;
+    }
+
+    .quick-facts > div + div {
+      background: #ffedf5;
+    }
+
+    dt, .venue-note {
+      color: var(--muted);
+      font-size: .875rem;
+    }
+
+    .quick-facts dd {
+      margin-top: .125rem;
+      color: var(--ink);
+      font-size: clamp(1.375rem, 6vw, 1.625rem);
+      font-variant-numeric: tabular-nums;
+      font-weight: 800;
+      letter-spacing: -.045em;
+      line-height: 1.3;
+    }
+
+    .logistics {
+      display: grid;
+      gap: .5rem;
+      padding-inline: .25rem;
+    }
+
+    .logistics > div {
+      display: grid;
+      grid-template-columns: 5.625rem minmax(0, 1fr);
+      align-items: baseline;
+      gap: .5rem;
+    }
+
+    .logistics dd {
+      font-weight: 700;
+    }
+
+    .venue-note {
+      display: block;
+      font-weight: 400;
+    }
+
+    .application {
+      position: sticky;
+      bottom: 0;
+      margin-top: auto;
+      padding: .75rem var(--gutter) calc(.75rem + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--rule);
+      background: var(--paper);
+      text-align: center;
+    }
+
+    .apply-button {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      min-height: 3.25rem;
+      padding: .625rem 1rem;
+      border: 0;
+      border-radius: .875rem;
+      background: var(--pink);
+      color: white;
+      font: inherit;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .apply-button:disabled {
+      background: #f8e5ee;
+      color: #7e3556;
+      cursor: not-allowed;
+    }
+
+    .apply-button:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 3px;
+    }
+
+    .application p {
+      margin-top: .375rem;
+      color: var(--muted);
+      font-size: .875rem;
+    }
+
+    @media (max-height: 31rem) {
+      .application {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="invitation">
+    <main>
+      <header class="hero">
+        <div>
+          <h1>연말 파티, <span>같이 놀아요!</span></h1>
+          <p>올해도 고생 많았어요!</p>
+        </div>
+        <img class="hero-art" src="assets/year-end-party.webp" alt="">
+      </header>
+
+      <section class="program" aria-labelledby="program-title">
+        <h2 id="program-title">뭐 하고 놀아요?</h2>
+        <ul class="program-list" role="list">
+          <li>
+            <span class="program-icon" aria-hidden="true">🎲</span>
+            <p><strong>레크리에이션 게임</strong>다 같이 웃으면서 한 판 놀아요!</p>
+          </li>
+          <li>
+            <span class="program-icon" aria-hidden="true">🍽️</span>
+            <p><strong>맛있는 음식</strong>배도 든든하게, 같이 나눠 먹어요!</p>
+          </li>
+          <li>
+            <span class="program-icon" aria-hidden="true">🎉</span>
+            <p><strong>간단한 주류</strong>가볍게 곁들일 술도 준비해요.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="details" aria-labelledby="details-title">
+        <h2 id="details-title">모이기 전에 확인해요!</h2>
+        <dl class="quick-facts">
+          <div>
+            <dt>몇 명이 모여요?</dt>
+            <dd>10~20명</dd>
+          </div>
+          <div>
+            <dt>참가비는요?</dt>
+            <dd>30,000원</dd>
+          </div>
+        </dl>
+        <dl class="logistics">
+          <div>
+            <dt>언제 만나요?</dt>
+            <dd>날짜와 시간은 정해지면 알려드릴게요.</dd>
+          </div>
+          <div>
+            <dt>어디서 봐요?</dt>
+            <dd>파티룸에서 만나요! <span class="venue-note">참가 인원이 확정되면 장소를 다시 알려드릴게요.</span></dd>
+          </div>
+        </dl>
+      </section>
+    </main>
+
+    <footer class="application">
+      <!-- 신청 URL이 정해지면 동일한 클래스의 링크(a)로 교체합니다. -->
+      <button class="apply-button" type="button" disabled aria-describedby="application-status">파티 신청하기</button>
+      <p id="application-status">신청 링크가 준비되면 알려드릴게요!</p>
+    </footer>
+  </div>
+</body>
+</html>
